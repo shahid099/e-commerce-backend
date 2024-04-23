@@ -6,10 +6,6 @@ dotenv.config();
 import Product from '../Models/productsDatamodel.js';
 import upload from '../middlewares/multer.js';
 
-// Multer
-// const uploads = multer({ dest: __dirname + "/uploads" });
-
-
 // Cloudinary Configuration
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -19,21 +15,22 @@ cloudinary.config({
 
 // ROUTE TO GET THE SAVED DATA FROM THE DATABASE
 
-    router.get('/product', async (req, res)=> {
+    router.get('/products', async (req, res)=> {
       try {
           let proudcts = await Product.find();
-          res.send({ proudcts })
+          res.send({ proudcts });
           
       } catch (error) {
           console.error(error.message);
-          res.status(500).send({error: "Internal Server error"})
+          res.status(500).send({error: "Internal Server error"});
       }
-  })
+  });
+
     // Post Route to take data and save it to Database Mongodb Upload the Image data to Cloudinary
   router.post('/additems', upload.array('imageData'), async (req, res)=> {
     try {
         // Getting the String type data from the multer using req.body
-        const { descriptionData, catagoryData, barcodeData, itemskuData, stockofItemsData } = req.body;
+        const { descriptionData, catagoryData, barcodeData, itemskuData, stockofItemsData, itemPrice } = req.body;
         // Getting files type data from the multer using req.files
         // req.files is the object
         const imagedata = req.files;
@@ -51,7 +48,8 @@ cloudinary.config({
             catagoryData,
             barcodeData,
             itemskuData,
-            stockofItemsData
+            stockofItemsData,
+            itemPrice
          });
 
          await newProduct.save();

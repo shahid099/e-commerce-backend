@@ -17,7 +17,7 @@ ConnectionFunction();
 
 // MY ROUTES
 app.use('/', productsDataroute);
-app.use('/', productsDataroute);
+// app.use('/', productsDataroute);
 
 
 

@@ -6,6 +6,7 @@ const productsSchema = new mongoose.Schema({
     barcodeData: String,
     itemskuData: String,
     stockofItemsData: String,
+    itemPrice: String,
 });
 
 const productsData = mongoose.model('productsData', productsSchema);
