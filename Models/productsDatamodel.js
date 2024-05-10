@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const productsSchema = new mongoose.Schema({
+    cloudinaryId: String,
     imageData: String,
     descriptionData: String,
     catagoryData: String,
